@@ -1,24 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState , useEffect } from 'react';
+import CardCharacter from './componets/cardCharacter';
 
 function App() {
+  const [characters, setCharacters] = useState([])
+  
+  useEffect(()=>{
+    const fetchData = async () => {
+      const res = await fetch("https://apisimpsons.fly.dev/api/personajes")
+      const data = await res.json()
+
+      setCharacters(data.docs)
+    }
+
+    fetchData()
+  }, [])
+  
+  console.log(characters);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>LOS SIMPSONS</h1>
+      <section className='cards'>
+      {characters.map((character,id)=>{
+        return (
+          <CardCharacter key={id}
+          character={character}/>
+        )
+      })}
+      </section>
+    </>
   );
 }
 
