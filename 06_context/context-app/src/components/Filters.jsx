@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
+import { FilterContext } from '../data/context/ContextFilter';
 
-function Filters({ setFilters }) {
+function Filters() {
 
+    const {setFilters} = useContext(FilterContext)
+    
     //OJO CON ESTO
     const [minPrice, setMinPrice] = useState(0)
 
