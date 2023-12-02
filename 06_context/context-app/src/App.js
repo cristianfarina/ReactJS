@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Products from "./components/Products";
 import { products } from "./data/products";
+import Header from "./components/Header";
+
 
 function App() {
   
   const [filters, setFilters] = useState({
-    category: "Hogar",
-    minPrice: 2
+    category: "all",
+    minPrice: 0
   })
 
   const filterProducts = (products) => {
@@ -24,7 +26,7 @@ function App() {
 
   return (
     <>
-      <h1>REACT SHOPPING</h1>
+      <Header setFilters={setFilters}/>
       <Products products={filteredProduct} />
     </>
   );
